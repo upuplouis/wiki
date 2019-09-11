@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package protos;
+
+import "google/api/annotations.proto";
+
+message Null{}
+
+service GetwayService {
+    rpc GetAll(Null) returns (Null) {
+        option (google.api.http) = {
+            get: "/get"
+        };
+    }
+}

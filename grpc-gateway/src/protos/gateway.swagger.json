@@ -1,0 +1,40 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "gateway.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/get": {
+      "get": {
+        "operationId": "GetAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/protosNull"
+            }
+          }
+        },
+        "tags": [
+          "GetwayService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protosNull": {
+      "type": "object"
+    }
+  }
+}
