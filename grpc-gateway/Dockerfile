@@ -10,5 +10,5 @@ RUN export GOPATH=/root/go/src/grpc-gateway:/root/go \
 
 FROM centos
 WORKDIR /root
-COPY src/build-docker .
+COPY src/build-docker/container/ .
 COPY --from=builder /root/go/src/grpc-gateway/src/main ./main
