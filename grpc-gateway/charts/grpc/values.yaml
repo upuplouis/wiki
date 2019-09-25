@@ -1,0 +1,24 @@
+replicaCount: 1
+global:
+  repo: localhost/grpc
+  tag: dev
+  Env:
+    TEST: test
+grpc-gateway:
+  image: test/grpc-gateway:dev
+  resource:
+    requests:
+      cpu: 1
+      nvidia.com/gpu: 1
+      memory: 4Gi
+      ephemeral-storage: 1Gi
+    limit:
+      cpu: 1
+      nvidia.com/gpu: 1
+      memory: 4Gi
+      ephemeral-storage: 1Gi
+istio:
+  prefix: ""
+service:
+  type: ClusterIP/NodePort
+  port: 33055
