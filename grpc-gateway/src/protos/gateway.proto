@@ -4,7 +4,38 @@ package protos;
 
 import "google/api/annotations.proto";
 
+enum ResCode {
+    SUPPLY = 0;
+}
+
 message Null{}
+
+message Pparam {
+    string p = 1;
+}
+
+message Mparam {
+    string m = 1;
+}
+
+message Request{
+    string uuid = 1;
+    int32 fps = 2;
+    repeated string uuids = 3;
+    map<int32, string> label = 4;
+    float x = 5;
+    bool flag = 6;
+    oneof params {
+        Pparam pparam = 7;
+        Mparam mparam = 8;
+    }
+    ResponseCode response_code = 9;
+    enum ResponseCode {
+        SUPPLY = 0;
+        SUCCESS = 1;
+        ERROR = 2;
+    }
+}
 
 service GetwayService {
     rpc GetAll(Null) returns (Null) {

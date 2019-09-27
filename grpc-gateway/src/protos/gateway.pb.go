@@ -25,6 +25,56 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+type ResCode int32
+
+const (
+	ResCode_SUPPLY ResCode = 0
+)
+
+var ResCode_name = map[int32]string{
+	0: "SUPPLY",
+}
+
+var ResCode_value = map[string]int32{
+	"SUPPLY": 0,
+}
+
+func (x ResCode) String() string {
+	return proto.EnumName(ResCode_name, int32(x))
+}
+
+func (ResCode) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_f1a937782ebbded5, []int{0}
+}
+
+type Request_ResponseCode int32
+
+const (
+	Request_SUPPLY  Request_ResponseCode = 0
+	Request_SUCCESS Request_ResponseCode = 1
+	Request_ERROR   Request_ResponseCode = 2
+)
+
+var Request_ResponseCode_name = map[int32]string{
+	0: "SUPPLY",
+	1: "SUCCESS",
+	2: "ERROR",
+}
+
+var Request_ResponseCode_value = map[string]int32{
+	"SUPPLY":  0,
+	"SUCCESS": 1,
+	"ERROR":   2,
+}
+
+func (x Request_ResponseCode) String() string {
+	return proto.EnumName(Request_ResponseCode_name, int32(x))
+}
+
+func (Request_ResponseCode) EnumDescriptor() ([]byte, []int) {
+	return fileDescriptor_f1a937782ebbded5, []int{3, 0}
+}
+
 type Null struct {
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
@@ -56,23 +106,261 @@ func (m *Null) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Null proto.InternalMessageInfo
 
+type Pparam struct {
+	P                    string   `protobuf:"bytes,1,opt,name=p,proto3" json:"p,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Pparam) Reset()         { *m = Pparam{} }
+func (m *Pparam) String() string { return proto.CompactTextString(m) }
+func (*Pparam) ProtoMessage()    {}
+func (*Pparam) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f1a937782ebbded5, []int{1}
+}
+
+func (m *Pparam) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Pparam.Unmarshal(m, b)
+}
+func (m *Pparam) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Pparam.Marshal(b, m, deterministic)
+}
+func (m *Pparam) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Pparam.Merge(m, src)
+}
+func (m *Pparam) XXX_Size() int {
+	return xxx_messageInfo_Pparam.Size(m)
+}
+func (m *Pparam) XXX_DiscardUnknown() {
+	xxx_messageInfo_Pparam.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Pparam proto.InternalMessageInfo
+
+func (m *Pparam) GetP() string {
+	if m != nil {
+		return m.P
+	}
+	return ""
+}
+
+type Mparam struct {
+	M                    string   `protobuf:"bytes,1,opt,name=m,proto3" json:"m,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Mparam) Reset()         { *m = Mparam{} }
+func (m *Mparam) String() string { return proto.CompactTextString(m) }
+func (*Mparam) ProtoMessage()    {}
+func (*Mparam) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f1a937782ebbded5, []int{2}
+}
+
+func (m *Mparam) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Mparam.Unmarshal(m, b)
+}
+func (m *Mparam) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Mparam.Marshal(b, m, deterministic)
+}
+func (m *Mparam) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Mparam.Merge(m, src)
+}
+func (m *Mparam) XXX_Size() int {
+	return xxx_messageInfo_Mparam.Size(m)
+}
+func (m *Mparam) XXX_DiscardUnknown() {
+	xxx_messageInfo_Mparam.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Mparam proto.InternalMessageInfo
+
+func (m *Mparam) GetM() string {
+	if m != nil {
+		return m.M
+	}
+	return ""
+}
+
+type Request struct {
+	Uuid  string           `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Fps   int32            `protobuf:"varint,2,opt,name=fps,proto3" json:"fps,omitempty"`
+	Uuids []string         `protobuf:"bytes,3,rep,name=uuids,proto3" json:"uuids,omitempty"`
+	Label map[int32]string `protobuf:"bytes,4,rep,name=label,proto3" json:"label,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	X     float32          `protobuf:"fixed32,5,opt,name=x,proto3" json:"x,omitempty"`
+	Flag  bool             `protobuf:"varint,6,opt,name=flag,proto3" json:"flag,omitempty"`
+	// Types that are valid to be assigned to Params:
+	//	*Request_Pparam
+	//	*Request_Mparam
+	Params               isRequest_Params     `protobuf_oneof:"params"`
+	ResponseCode         Request_ResponseCode `protobuf:"varint,9,opt,name=response_code,json=responseCode,proto3,enum=protos.Request_ResponseCode" json:"response_code,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}             `json:"-"`
+	XXX_unrecognized     []byte               `json:"-"`
+	XXX_sizecache        int32                `json:"-"`
+}
+
+func (m *Request) Reset()         { *m = Request{} }
+func (m *Request) String() string { return proto.CompactTextString(m) }
+func (*Request) ProtoMessage()    {}
+func (*Request) Descriptor() ([]byte, []int) {
+	return fileDescriptor_f1a937782ebbded5, []int{3}
+}
+
+func (m *Request) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Request.Unmarshal(m, b)
+}
+func (m *Request) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Request.Marshal(b, m, deterministic)
+}
+func (m *Request) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Request.Merge(m, src)
+}
+func (m *Request) XXX_Size() int {
+	return xxx_messageInfo_Request.Size(m)
+}
+func (m *Request) XXX_DiscardUnknown() {
+	xxx_messageInfo_Request.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Request proto.InternalMessageInfo
+
+func (m *Request) GetUuid() string {
+	if m != nil {
+		return m.Uuid
+	}
+	return ""
+}
+
+func (m *Request) GetFps() int32 {
+	if m != nil {
+		return m.Fps
+	}
+	return 0
+}
+
+func (m *Request) GetUuids() []string {
+	if m != nil {
+		return m.Uuids
+	}
+	return nil
+}
+
+func (m *Request) GetLabel() map[int32]string {
+	if m != nil {
+		return m.Label
+	}
+	return nil
+}
+
+func (m *Request) GetX() float32 {
+	if m != nil {
+		return m.X
+	}
+	return 0
+}
+
+func (m *Request) GetFlag() bool {
+	if m != nil {
+		return m.Flag
+	}
+	return false
+}
+
+type isRequest_Params interface {
+	isRequest_Params()
+}
+
+type Request_Pparam struct {
+	Pparam *Pparam `protobuf:"bytes,7,opt,name=pparam,proto3,oneof"`
+}
+
+type Request_Mparam struct {
+	Mparam *Mparam `protobuf:"bytes,8,opt,name=mparam,proto3,oneof"`
+}
+
+func (*Request_Pparam) isRequest_Params() {}
+
+func (*Request_Mparam) isRequest_Params() {}
+
+func (m *Request) GetParams() isRequest_Params {
+	if m != nil {
+		return m.Params
+	}
+	return nil
+}
+
+func (m *Request) GetPparam() *Pparam {
+	if x, ok := m.GetParams().(*Request_Pparam); ok {
+		return x.Pparam
+	}
+	return nil
+}
+
+func (m *Request) GetMparam() *Mparam {
+	if x, ok := m.GetParams().(*Request_Mparam); ok {
+		return x.Mparam
+	}
+	return nil
+}
+
+func (m *Request) GetResponseCode() Request_ResponseCode {
+	if m != nil {
+		return m.ResponseCode
+	}
+	return Request_SUPPLY
+}
+
+// XXX_OneofWrappers is for the internal use of the proto package.
+func (*Request) XXX_OneofWrappers() []interface{} {
+	return []interface{}{
+		(*Request_Pparam)(nil),
+		(*Request_Mparam)(nil),
+	}
+}
+
 func init() {
+	proto.RegisterEnum("protos.ResCode", ResCode_name, ResCode_value)
+	proto.RegisterEnum("protos.Request_ResponseCode", Request_ResponseCode_name, Request_ResponseCode_value)
 	proto.RegisterType((*Null)(nil), "protos.Null")
+	proto.RegisterType((*Pparam)(nil), "protos.Pparam")
+	proto.RegisterType((*Mparam)(nil), "protos.Mparam")
+	proto.RegisterType((*Request)(nil), "protos.Request")
+	proto.RegisterMapType((map[int32]string)(nil), "protos.Request.LabelEntry")
 }
 
 func init() { proto.RegisterFile("gateway.proto", fileDescriptor_f1a937782ebbded5) }
 
 var fileDescriptor_f1a937782ebbded5 = []byte{
-	// 134 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4d, 0x4f, 0x2c, 0x49,
-	0x2d, 0x4f, 0xac, 0xd4, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x03, 0x53, 0xc5, 0x52, 0x32,
-	0xe9, 0xf9, 0xf9, 0xe9, 0x39, 0xa9, 0xfa, 0x89, 0x05, 0x99, 0xfa, 0x89, 0x79, 0x79, 0xf9, 0x25,
-	0x89, 0x25, 0x99, 0xf9, 0x79, 0xc5, 0x10, 0x55, 0x4a, 0x6c, 0x5c, 0x2c, 0x7e, 0xa5, 0x39, 0x39,
-	0x46, 0xce, 0x5c, 0xbc, 0xee, 0xa9, 0x25, 0xe5, 0x89, 0x95, 0xc1, 0xa9, 0x45, 0x65, 0x99, 0xc9,
-	0xa9, 0x42, 0x46, 0x5c, 0x6c, 0xee, 0xa9, 0x25, 0x8e, 0x39, 0x39, 0x42, 0x3c, 0x10, 0xa5, 0xc5,
-	0x7a, 0x20, 0x85, 0x52, 0x28, 0x3c, 0x25, 0x9e, 0xa6, 0xcb, 0x4f, 0x26, 0x33, 0xb1, 0x09, 0xb1,
-	0xe8, 0xa7, 0xa7, 0x96, 0x24, 0x41, 0xac, 0x34, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0x72, 0x64,
-	0xfc, 0x37, 0x8a, 0x00, 0x00, 0x00,
+	// 424 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x5c, 0x52, 0xb1, 0x6e, 0xdb, 0x30,
+	0x10, 0x0d, 0x25, 0x8b, 0xb6, 0xce, 0x72, 0x60, 0x10, 0x6d, 0x21, 0x18, 0x19, 0x04, 0x4d, 0x44,
+	0x07, 0xbb, 0x50, 0x97, 0xa0, 0x5b, 0x6a, 0x18, 0xe9, 0x90, 0xb4, 0x06, 0x85, 0x0c, 0x9d, 0x0a,
+	0x26, 0x66, 0x04, 0xa3, 0xb4, 0xc8, 0x8a, 0x54, 0x12, 0xaf, 0xfd, 0x85, 0xfe, 0x44, 0xff, 0xa7,
+	0xbf, 0xd0, 0x0f, 0x29, 0x28, 0xca, 0x69, 0x92, 0x49, 0xf7, 0xee, 0x3d, 0x9d, 0xde, 0x3d, 0x1d,
+	0x4c, 0x2a, 0x6e, 0xc5, 0x3d, 0xdf, 0xcf, 0x75, 0xa3, 0xac, 0x22, 0xb8, 0x7b, 0x98, 0xd9, 0x49,
+	0xa5, 0x54, 0x25, 0xc5, 0x82, 0xeb, 0xed, 0x82, 0xd7, 0xb5, 0xb2, 0xdc, 0x6e, 0x55, 0x6d, 0xbc,
+	0x2a, 0xc7, 0x30, 0xf8, 0xdc, 0x4a, 0x99, 0xbf, 0x01, 0xbc, 0xd6, 0xbc, 0xe1, 0x3b, 0x92, 0x00,
+	0xd2, 0x29, 0xca, 0x10, 0x8d, 0x19, 0xd2, 0xae, 0x7f, 0xf9, 0xd8, 0xdf, 0x1d, 0xfa, 0xbb, 0xfc,
+	0x77, 0x08, 0x43, 0x26, 0x7e, 0xb4, 0xc2, 0x58, 0x42, 0x60, 0xd0, 0xb6, 0xdb, 0x4d, 0x4f, 0x76,
+	0x35, 0x99, 0x42, 0x78, 0xab, 0x4d, 0x1a, 0x64, 0x88, 0x46, 0xcc, 0x95, 0xe4, 0x15, 0x44, 0x8e,
+	0x31, 0x69, 0x98, 0x85, 0x34, 0x66, 0x1e, 0x90, 0x77, 0x10, 0x49, 0x7e, 0x2d, 0x64, 0x3a, 0xc8,
+	0x42, 0x3a, 0x2e, 0x66, 0xde, 0x96, 0x99, 0xf7, 0xb3, 0xe7, 0x17, 0x8e, 0x5c, 0xd5, 0xb6, 0xd9,
+	0x33, 0x2f, 0x74, 0x3e, 0x1e, 0xd2, 0x28, 0x43, 0x34, 0x60, 0xe8, 0xc1, 0x7d, 0xfb, 0x56, 0xf2,
+	0x2a, 0xc5, 0x19, 0xa2, 0x23, 0xd6, 0xd5, 0x84, 0x02, 0xd6, 0x9d, 0xe7, 0x74, 0x98, 0x21, 0x3a,
+	0x2e, 0x8e, 0x0f, 0x43, 0xfd, 0x86, 0x9f, 0x8e, 0x58, 0xcf, 0x3b, 0xe5, 0xce, 0x2b, 0x47, 0xcf,
+	0x95, 0x97, 0x8f, 0x4a, 0xcf, 0x93, 0x33, 0x98, 0x34, 0xc2, 0x68, 0x55, 0x1b, 0xf1, 0xed, 0x46,
+	0x6d, 0x44, 0x1a, 0x67, 0x88, 0x1e, 0x17, 0x27, 0x2f, 0xfd, 0xb2, 0x5e, 0xb4, 0x54, 0x1b, 0xc1,
+	0x92, 0xe6, 0x09, 0x9a, 0x9d, 0x02, 0xfc, 0xdf, 0xc6, 0x05, 0xf4, 0x5d, 0xec, 0xbb, 0xcc, 0x22,
+	0xe6, 0x4a, 0x17, 0xd0, 0x1d, 0x97, 0xad, 0xe8, 0x42, 0x8b, 0x99, 0x07, 0x1f, 0x82, 0x53, 0x94,
+	0x17, 0x90, 0x3c, 0x9d, 0x4b, 0x00, 0x70, 0x79, 0xb5, 0x5e, 0x5f, 0x7c, 0x9d, 0x1e, 0x91, 0x31,
+	0x0c, 0xcb, 0xab, 0xe5, 0x72, 0x55, 0x96, 0x53, 0x44, 0x62, 0x88, 0x56, 0x8c, 0x7d, 0x61, 0xd3,
+	0xe0, 0xe3, 0x08, 0x70, 0xe7, 0xdc, 0xbc, 0x7d, 0xed, 0xfe, 0x94, 0x79, 0xf9, 0x62, 0xb1, 0x84,
+	0xc9, 0xb9, 0xb0, 0xf7, 0x7c, 0x5f, 0x8a, 0xe6, 0x6e, 0x7b, 0x23, 0x48, 0x01, 0xf8, 0x5c, 0xd8,
+	0x33, 0x29, 0x49, 0x72, 0xd8, 0xca, 0x9d, 0xc6, 0xec, 0x19, 0xca, 0x93, 0x9f, 0x7f, 0xfe, 0xfe,
+	0x0a, 0x30, 0x19, 0x2c, 0x2a, 0x61, 0xaf, 0xfd, 0x91, 0xbd, 0xff, 0x17, 0x00, 0x00, 0xff, 0xff,
+	0xf5, 0xe3, 0x6b, 0x24, 0x7c, 0x02, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
