@@ -3,22 +3,22 @@ kind: Service
 metadata:
   name: {{.Release.Name }}-service-grpc-gateway
   labels:
-    app: {{ include "backend.name" . }}
-    chart: {{ include "backend.chart" . }}
+    app: {{ include "gateway.name" . }}
+    chart: {{ include "gateway.chart" . }}
     app_label: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   type: {{ .Value.service.type }}
   ports:
-    - name: grpc-gateway
+    - name: gateway
       port: 9090
       protocol: TCP
       targetPort: 9090
       nodePort: {{ .Value.service.port }}
-    - name: grpc-gateway-rpc
+    - name: gateway-rpc
       port: 7070
       protocal: TCP
       targetPort: 7070
   selector:
-    app: {{ template "backend.name" }}
+    app: {{ template "gateway.name" }}
     app_label: {{ .Release.Name }}

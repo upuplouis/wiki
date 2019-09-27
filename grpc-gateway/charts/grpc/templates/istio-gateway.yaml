@@ -1,0 +1,36 @@
+apiVersion: networking.istio.io/vlalpha3
+kind: Gateway
+metadata:
+  name: gateway-gateway
+spec:
+  selector:
+    istio: {{ .Values.global.ingressConfig.istio_gateway }}
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+
+---
+apiVersion: networking.istio.io/vlalpha3
+kind: VirtualService
+metadata:
+  name: gateway-virtualservice
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - gateway-gateway
+  http:
+  - match:
+    - uri:
+        exact: "/gateway"
+    - uri:
+        prefix: "/gateway/"
+    route:
+    - destination:
+        host: {{.Release.Name }}-service-grpc-gateway
+        port:
+          number: 9090

@@ -4,7 +4,7 @@ global:
   tag: dev
   Env:
     TEST: test
-grpc-gateway:
+gateway:
   image: test/grpc-gateway:dev
   resource:
     requests:

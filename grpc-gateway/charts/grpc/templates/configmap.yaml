@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "gateway.fullname" . }}-insert-cm
+  labels:
+    app: {{ include "gateway.name" . }}
+    chart: {{ include "gateway.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+  insert.sql: |
+{{ .Value.config_data.insert_sql | indent 4 }}
